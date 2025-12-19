@@ -9,18 +9,9 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
-/src
-package-lock.json
-components.json
-postcss.config.mjs
-tsconfig.*.json
-vite.config.ts
-tsconfig.json
 # testing
 /coverage
-
-# next.js
-/.next/
+**/dist
 /out/
 
 # production
