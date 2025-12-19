@@ -6,7 +6,7 @@
       "require": "./dist/index.cjs"
     }
   },
-  "name": "react-tanstack-library",
+  "name": "react-tanstack-form-shadcn",
   "version": "0.0.1",
   "type": "module",
   "files": [
