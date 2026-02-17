@@ -7,16 +7,15 @@ interface FieldErrorMessageProps extends Omit<
   React.ComponentProps<"p">,
   "children"
 > {
-  // นิยาม children ใหม่ ให้ส่ง array ของ messages ออกไปได้
   children?: React.ReactNode | ((messages: string[]) => React.ReactNode);
   className?: string;
 }
 export default function FieldValidateMessage({
   className,
-  children,
   ...props
 }: FieldErrorMessageProps & ValidateProps) {
   const field = useFieldContext<string>();
+
   const errors = useStore(field.store, (state) =>
     state.meta.errors.map((err) =>
       typeof err === "string" ? err : err?.message,
@@ -25,13 +24,10 @@ export default function FieldValidateMessage({
   if (errors.length === 0) {
     return null;
   }
-  if (typeof children === "function") {
+  if (typeof props.children === "function") {
     return (
-      <FieldError
-        {...props}
-        className={className}
-      >
-        {children(errors)}
+      <FieldError {...props} className={className}>
+        {props.children(errors)}
       </FieldError>
     );
   }
@@ -40,15 +36,15 @@ export default function FieldValidateMessage({
       {...props}
       className={cn("flex flex-col text-sm text-destructive", className)}
     >
-      {errors.map((errorKey, index) => (
-        <span
-          key={`field-message-${field.name}-${index}`}
-          data-slot="form-message"
-          id={field.name}
-        >
-          {errorKey.message}
-        </span>
-      ))}
+      {props.children ||
+        errors.map((msg, index) => (
+          <span
+            key={`field-message-${field.name}-${index}`}
+            data-slot="form-message"
+          >
+            {msg}
+          </span>
+        ))}
     </FieldError>
   );
 }
