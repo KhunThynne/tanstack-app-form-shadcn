@@ -1,8 +1,8 @@
 import { useStore } from "@tanstack/react-form";
 import { useFieldContext } from "../hooks";
-import FieldErrorI18nMessage from "./shared/FieldErrorI18nMessage";
+import FieldErrorMessage from "./shared/FieldErrorMessage";
 
-import type { LabelDescription, WithClassNames } from "./type";
+import type { LabelDescription, ValidateProps, WithClassNames } from "./type";
 import LabelAndDescriptionFieldForm from "./shared/LabelAndDescriptionFieldForm";
 
 import { cn } from "@components/ui/utils";
@@ -36,14 +36,16 @@ export interface SelectFieldProps {
 }
 
 type FieldSelectProps = LabelDescription &
-  React.ComponentProps<typeof Select> &
-  WithClassNames<
+  React.ComponentProps<typeof Select> & {
+    validate?: ValidateProps;
+  } & WithClassNames<
     "label" | "description" | "selectTriger" | "field" | "validate"
   > &
   SelectFieldProps;
 
 export default function FieldSelect({
   label,
+  validate,
   description,
   classNames,
   className,
@@ -114,7 +116,10 @@ export default function FieldSelect({
           </SelectContent>
         </Select>
       </LabelAndDescriptionFieldForm>
-      <FieldErrorI18nMessage className={cn(`order-4`, classNames?.validate)} />
+      <FieldErrorMessage
+        className={cn(`order-4`, classNames?.validate)}
+        {...validate}
+      />
     </Field>
   );
 }

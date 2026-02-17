@@ -1,28 +1,32 @@
-import { useField, useStore } from '@tanstack/react-form'
-import { useFieldContext } from '../hooks'
-import FieldErrorI18nMessage from './shared/FieldErrorI18nMessage'
+import { useField, useStore } from "@tanstack/react-form";
+import { useFieldContext } from "../hooks";
 
-import type { WithClassNames, LabelDescription } from './type'
+import type { WithClassNames, LabelDescription, ValidateProps } from "./type";
 
-import { Field, FieldGroup, FieldLabel } from '@components/ui/field'
-import { cn } from '@components/ui/utils'
-import { Checkbox } from '@components/custom/checkbox'
+import { Field, FieldGroup, FieldLabel } from "@components/ui/field";
+import { cn } from "@components/ui/utils";
+import { Checkbox } from "@components/custom/checkbox";
+import FieldErrorMessage from "./shared/FieldErrorMessage";
 
 type FieldSelectProps = LabelDescription &
-  React.ComponentProps<typeof Checkbox> &
-  WithClassNames<'label' | 'description' | 'selectTriger' | 'field' | 'validate'>
+  React.ComponentProps<typeof Checkbox> & {
+    validate?: ValidateProps;
+  } & WithClassNames<
+    "label" | "description" | "selectTriger" | "field" | "validate"
+  >;
 
 export default function FieldCheckBox({
   label,
   classNames,
+  validate,
   className,
   ...checkbox
 }: FieldSelectProps) {
-  const { form, name } = useFieldContext<string[]>()
-  const field = useField({ mode: 'array', name, form })
-  const errors = useStore(field.store, (state) => state.meta.errors)
+  const { form, name } = useFieldContext<string[]>();
+  const field = useField({ mode: "array", name, form });
+  const errors = useStore(field.store, (state) => state.meta.errors);
   // const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
-  const isInvalid = errors.length > 0
+  const isInvalid = errors.length > 0;
 
   return (
     <FieldGroup data-slot="checkbox-group">
@@ -32,10 +36,10 @@ export default function FieldCheckBox({
       >
         <span className="flex gap-2">
           <Checkbox {...checkbox} className={cn(`peer cursor-pointer`)} />
-          <FieldLabel htmlFor={'test'}>{label}</FieldLabel>
+          <FieldLabel htmlFor={"test"}>{label}</FieldLabel>
         </span>
       </Field>
-      <FieldErrorI18nMessage className={cn(classNames?.validate)} />
+      <FieldErrorMessage className={cn(classNames?.validate)} {...validate} />
     </FieldGroup>
-  )
+  );
 }
