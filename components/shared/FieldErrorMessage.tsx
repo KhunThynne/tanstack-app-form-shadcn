@@ -1,17 +1,39 @@
-import { useFieldContext } from "../../hooks";
 import { useStore } from "@tanstack/react-form";
 import { FieldError } from "@components/ui/field";
 import { cn } from "@components/ui/utils";
+import { useFieldContext } from "../../hooks";
 import type { ValidateProps } from "../type";
-
-export default function FieldErrorMessage({
+interface FieldErrorMessageProps extends Omit<
+  React.ComponentProps<"p">,
+  "children"
+> {
+  // นิยาม children ใหม่ ให้ส่ง array ของ messages ออกไปได้
+  children?: React.ReactNode | ((messages: string[]) => React.ReactNode);
+  className?: string;
+}
+export default function FieldValidateMessage({
   className,
+  children,
   ...props
-}: React.ComponentProps<"p"> & ValidateProps) {
+}: FieldErrorMessageProps & ValidateProps) {
   const field = useFieldContext<string>();
-  const errors = useStore(field.store, (state) => state.meta.errors);
+  const errors = useStore(field.store, (state) =>
+    state.meta.errors.map((err) =>
+      typeof err === "string" ? err : err?.message,
+    ),
+  );
   if (errors.length === 0) {
     return null;
+  }
+  if (typeof children === "function") {
+    return (
+      <FieldError
+        {...props}
+        className={className}
+      >
+        {children(errors)}
+      </FieldError>
+    );
   }
   return (
     <FieldError
