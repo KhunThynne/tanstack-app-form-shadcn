@@ -54,6 +54,7 @@ export default function FieldInput({
         label={label}
         required={input.required}
         description={description}
+        htmlFor={field.name}
         classNames={{
           label: cn(`order-1`, classNames?.label),
           description: cn(`order-3`, classNames?.description),
@@ -66,6 +67,8 @@ export default function FieldInput({
           >
             <InputGroupInput
               {...input}
+              name={field.name}
+              id={field.name}
               required={false}
               value={field.state.value}
               className={cn(classNames?.input)}
@@ -111,6 +114,8 @@ export default function FieldInput({
           <>
             <Input
               {...input}
+              name={field.name}
+              id={field.name}
               required={false}
               value={field.state.value}
               className={cn(`order-2`, classNames?.input)}

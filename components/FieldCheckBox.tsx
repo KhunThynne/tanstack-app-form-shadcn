@@ -35,8 +35,8 @@ export default function FieldCheckBox({
         className={cn(`flex flex-col gap-1.5`, className, classNames?.field)}
       >
         <span className="flex gap-2">
-          <Checkbox {...checkbox} className={cn(`peer cursor-pointer`)} />
-          <FieldLabel htmlFor={"test"}>{label}</FieldLabel>
+          <Checkbox {...checkbox} id={field.name} className={cn(`peer cursor-pointer`)} />
+          <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
         </span>
       </Field>
       <FieldErrorMessage className={cn(classNames?.validate)} {...validate} />

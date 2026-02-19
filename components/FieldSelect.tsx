@@ -63,6 +63,7 @@ export default function FieldSelect({
       className={cn(`flex flex-col gap-1.5`, className, classNames?.field)}
     >
       <LabelAndDescriptionFieldForm
+        htmlFor={field.name}
         required={select.required}
         label={label}
         description={description}
@@ -80,6 +81,7 @@ export default function FieldSelect({
           {...select}
         >
           <SelectTrigger
+            id={field.name}
             data-invalid={isInvalid}
             className={cn(
               `order-2 grow cursor-pointer`,

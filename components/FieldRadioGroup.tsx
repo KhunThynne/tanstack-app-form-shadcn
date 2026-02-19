@@ -50,6 +50,7 @@ export default function FieldRadioGroup({
       className={cn(``, className, classNames?.field)}
     >
       <LabelAndDescriptionFieldForm
+        htmlFor={field.name}
         label={label}
         description={description}
         classNames={{
@@ -59,6 +60,7 @@ export default function FieldRadioGroup({
       >
         <RadioGroup
           {...radioGrupeProp}
+          id={field.name}
           onValueChange={field.handleChange}
           value={field.state.value}
           className={cn("group border-t pt-3", className, classNames?.group)}

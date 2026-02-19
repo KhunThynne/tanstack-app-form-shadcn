@@ -7,6 +7,7 @@ export interface FormXdPropsField {
 export type LabelDescription = {
   label?: string | React.ReactNode;
   description?: string | React.ReactNode;
+  htmlFor?: string;
 };
 export type ValidateProps = {
   validate?: string | React.ReactNode;

@@ -37,9 +37,11 @@ export default function FieldTextArea({
           label: cn(`order-1`, classNames?.label),
           description: cn(`order-3`, classNames?.description),
         }}
+        htmlFor={field.name}
       >
         <Textarea
           {...textarea}
+          id={field.name}
           value={field.state.value}
           className={cn(`order-2`, classNames?.textarea)}
           onChange={(e) => field.handleChange(e.target.value)}

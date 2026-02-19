@@ -45,7 +45,7 @@ export default function FieldSwitch({
         {(label || description) && (
           <FieldContent className={cn(classNames?.content)}>
             {label && (
-              <FieldLabel className={cn(classNames?.label)}>{label}</FieldLabel>
+              <FieldLabel className={cn(classNames?.label)} htmlFor={field.name}>{label}</FieldLabel>
             )}
             {description && (
               <FieldDescription className={cn(classNames?.description)}>
@@ -60,13 +60,14 @@ export default function FieldSwitch({
         )}
 
         <Switch
+          id={field.name}
           type="button"
-          {...switchProp}
           name={field.name}
           checked={field.state.value}
           className={cn(``, classNames?.switch)}
           onCheckedChange={field.handleChange}
           aria-invalid={isInvalid}
+          {...switchProp}
         />
       </Field>
     </FieldGroup>
