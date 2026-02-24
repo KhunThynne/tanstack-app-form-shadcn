@@ -15,6 +15,7 @@ interface SubscribeButtonProps extends Omit<
 }
 export default function SubscribeButton({
   children,
+  disabled,
   ...buttonProps
 }: SubscribeButtonProps) {
   const form = useFormContext();
@@ -30,7 +31,7 @@ export default function SubscribeButton({
     >
       {([canSubmit, isSubmitting, isDirty, isValid, isDefaultValue]) => (
         <Button
-          disabled={isDefaultValue || !canSubmit || isSubmitting}
+          disabled={disabled || isDefaultValue || !canSubmit || isSubmitting}
           {...buttonProps}
         >
           {typeof children === "function"
