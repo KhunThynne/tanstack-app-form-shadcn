@@ -3,23 +3,15 @@ import { FieldError } from "@components/ui/field";
 import { cn } from "@components/ui/utils";
 import { useFieldContext } from "../../hooks";
 import type { ValidateProps } from "../type";
-interface FieldErrorMessageProps extends Omit<
-  React.ComponentProps<"p">,
-  "children"
-> {
+interface FieldErrorMessageProps extends Omit<React.ComponentProps<"p">, "children"> {
   children?: React.ReactNode | ((messages: string[]) => React.ReactNode);
   className?: string;
 }
-export default function FieldValidateMessage({
-  className,
-  ...props
-}: FieldErrorMessageProps & ValidateProps) {
+export default function FieldValidateMessage({ className, ...props }: FieldErrorMessageProps & ValidateProps) {
   const field = useFieldContext<string>();
 
-  const errors = useStore(field.store, (state) =>
-    state.meta.errors.map((err) =>
-      typeof err === "string" ? err : err?.message,
-    ),
+  const errors = useStore(field.store, state =>
+    state.meta.errors.map(err => (typeof err === "string" ? err : err?.message)),
   );
   if (errors.length === 0) {
     return null;
@@ -32,16 +24,10 @@ export default function FieldValidateMessage({
     );
   }
   return (
-    <FieldError
-      {...props}
-      className={cn("flex flex-col text-sm text-destructive", className)}
-    >
+    <FieldError {...props} className={cn("flex flex-col text-sm text-destructive", className)}>
       {props.children ||
         errors.map((msg, index) => (
-          <span
-            key={`field-message-${field.name}-${index}`}
-            data-slot="form-message"
-          >
+          <span key={`field-message-${field.name}-${index}`} data-slot="form-message">
             {msg}
           </span>
         ))}

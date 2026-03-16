@@ -38,9 +38,7 @@ export interface SelectFieldProps {
 type FieldSelectProps = LabelDescription &
   React.ComponentProps<typeof Select> & {
     validate?: ValidateProps;
-  } & WithClassNames<
-    "label" | "description" | "selectTriger" | "field" | "validate"
-  > &
+  } & WithClassNames<"label" | "description" | "selectTriger" | "field" | "validate"> &
   SelectFieldProps;
 
 export default function FieldSelect({
@@ -54,14 +52,11 @@ export default function FieldSelect({
   ...select
 }: FieldSelectProps) {
   const field = useFieldContext<string>();
-  const errors = useStore(field.store, (state) => state.meta.errors);
+  const errors = useStore(field.store, state => state.meta.errors);
   const isInvalid = errors.length > 0;
   const isGrouped = Array.isArray(options) && "items" in options[0];
   return (
-    <Field
-      data-invalid={isInvalid}
-      className={cn(`flex flex-col gap-1.5`, className, classNames?.field)}
-    >
+    <Field data-invalid={isInvalid} className={cn(`flex flex-col gap-1.5`, className, classNames?.field)}>
       <LabelAndDescriptionFieldForm
         htmlFor={field.name}
         required={select.required}
@@ -83,10 +78,7 @@ export default function FieldSelect({
           <SelectTrigger
             id={field.name}
             data-invalid={isInvalid}
-            className={cn(
-              `order-2 grow cursor-pointer`,
-              classNames?.selectTriger,
-            )}
+            className={cn(`order-2 grow cursor-pointer`, classNames?.selectTriger)}
           >
             <SelectValue placeholder={placeholder ?? "Select..."} />
           </SelectTrigger>
@@ -95,33 +87,22 @@ export default function FieldSelect({
               ? (options as OptionGroup[]).map((group, idx) => (
                   <SelectGroup key={idx}>
                     {group.label && <SelectLabel>{group.label}</SelectLabel>}
-                    {group.items.map((item) => (
-                      <SelectItem
-                        key={item.value}
-                        value={item.value}
-                        className="cursor-pointer"
-                      >
+                    {group.items.map(item => (
+                      <SelectItem key={item.value} value={item.value} className="cursor-pointer">
                         {item.label}
                       </SelectItem>
                     ))}
                   </SelectGroup>
                 ))
-              : (options as Option[]).map((item) => (
-                  <SelectItem
-                    key={item.value}
-                    value={item.value}
-                    className="cursor-pointer"
-                  >
+              : (options as Option[]).map(item => (
+                  <SelectItem key={item.value} value={item.value} className="cursor-pointer">
                     {item.label}
                   </SelectItem>
                 ))}
           </SelectContent>
         </Select>
       </LabelAndDescriptionFieldForm>
-      <FieldErrorMessage
-        className={cn(`order-4`, classNames?.validate)}
-        {...validate}
-      />
+      <FieldErrorMessage className={cn(`order-4`, classNames?.validate)} {...validate} />
     </Field>
   );
 }

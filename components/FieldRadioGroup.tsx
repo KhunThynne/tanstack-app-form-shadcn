@@ -16,12 +16,8 @@ import {
 } from "@components/ui/field";
 import { cn } from "@components/ui/utils";
 
-type CommonClassNames = WithClassNames<
-  "container" | "title" | "description" | "section"
->;
-export type RadioFieldItemProps = LabelDescription &
-  React.ComponentProps<typeof RadioGroupItem> &
-  CommonClassNames;
+type CommonClassNames = WithClassNames<"container" | "title" | "description" | "section">;
+export type RadioFieldItemProps = LabelDescription & React.ComponentProps<typeof RadioGroupItem> & CommonClassNames;
 
 export type RadioFieldItemsType = {
   items: RadioFieldItemProps[];
@@ -42,84 +38,70 @@ export default function FieldRadioGroup({
   ...radioGrupeProp
 }: FieldRadioGroupProps) {
   const field = useFieldContext<string>();
-  const errors = useStore(field.store, (state) => state.meta.errors);
+  const errors = useStore(field.store, state => state.meta.errors);
   const isInvalid = errors.length > 0;
   // const isGrouped = Array.isArray(options) && "items" in options[0];
   return (
-    <FieldSet
-      data-invalid={isInvalid}
-      className={cn(``, className, classNames?.field)}
-    >
+    <FieldSet data-invalid={isInvalid} className={cn(``, className, classNames?.field)}>
       <FieldLegend>test</FieldLegend>
-         <RadioGroup
-          {...radioGrupeProp}
-          id={field.name}
-          onValueChange={field.handleChange}
-          value={field.state.value}
-          className={cn("group", className, classNames?.group)}
-        >
-          {items.map((item, index) => {
-            const id = `${field.name}-${item.value}-${index}`;
-            const { title, description, classNames, ...propItem } = item;
-            return (
-              <FieldLabel
-                className={cn(
-                  "flex space-x-2",
-                  //   items.classNames?.container,
-                  classNames?.container,
-                )}
-                key={id}
-              >
-                <Field
-                  orientation="horizontal"
-                  className={cn(classNames?.section)}
-                >
-                  <FieldContent>
-                    {title &&
-                      (typeof title === "string" ? (
-                        <FieldTitle
-                          className={cn(
-                            classNames?.title,
-                            //   items.classNames?.label,
-                            "cursor-pointer",
-                          )}
-                        >
-                          {item.title}
-                        </FieldTitle>
-                      ) : (
-                        title
-                      ))}
-                    {description &&
-                      (typeof description === "string" ? (
-                        <FieldDescription
-                          className={cn(
-                            classNames?.description,
-                            //   items.classNames?.description,
-                            "mt-1 text-sm text-muted-foreground",
-                          )}
-                        >
-                          {item.description}
-                        </FieldDescription>
-                      ) : (
-                        description
-                      ))}
-                  </FieldContent>
+      <RadioGroup
+        {...radioGrupeProp}
+        id={field.name}
+        onValueChange={field.handleChange}
+        value={field.state.value}
+        className={cn("group", className, classNames?.group)}
+      >
+        {items.map((item, index) => {
+          const id = `${field.name}-${item.value}-${index}`;
+          const { title, description, classNames, ...propItem } = item;
+          return (
+            <FieldLabel
+              className={cn(
+                "flex space-x-2",
+                //   items.classNames?.container,
+                classNames?.container,
+              )}
+              key={id}
+            >
+              <Field orientation="horizontal" className={cn(classNames?.section)}>
+                <FieldContent>
+                  {title &&
+                    (typeof title === "string" ? (
+                      <FieldTitle
+                        className={cn(
+                          classNames?.title,
+                          //   items.classNames?.label,
+                          "cursor-pointer",
+                        )}
+                      >
+                        {item.title}
+                      </FieldTitle>
+                    ) : (
+                      title
+                    ))}
+                  {description &&
+                    (typeof description === "string" ? (
+                      <FieldDescription
+                        className={cn(
+                          classNames?.description,
+                          //   items.classNames?.description,
+                          "mt-1 text-sm text-muted-foreground",
+                        )}
+                      >
+                        {item.description}
+                      </FieldDescription>
+                    ) : (
+                      description
+                    ))}
+                </FieldContent>
 
-                  <RadioGroupItem
-                    {...propItem}
-                    id={id}
-                    value={item.value ?? id}
-                    aria-invalid={isInvalid}
-                  />
-                </Field>
-              </FieldLabel>
-            );
-          })}
-        </RadioGroup>
-      <FieldErrorMessage
-        className={cn(`order-4`, classNames?.validate)}
-        {...validate}
-      />
+                <RadioGroupItem {...propItem} id={id} value={item.value ?? id} aria-invalid={isInvalid} />
+              </Field>
+            </FieldLabel>
+          );
+        })}
+      </RadioGroup>
+      <FieldErrorMessage className={cn(`order-4`, classNames?.validate)} {...validate} />
     </FieldSet>
   );
 }

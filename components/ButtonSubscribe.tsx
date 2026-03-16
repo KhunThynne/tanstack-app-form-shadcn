@@ -2,37 +2,19 @@ import { Button } from "@components/ui/button";
 import { useFormContext } from "../hooks/form-context";
 import type { AnyFormState } from "@tanstack/react-form";
 
-interface SubscribeButtonProps extends Omit<
-  React.ComponentProps<typeof Button>,
-  "children"
-> {
+interface SubscribeButtonProps extends Omit<React.ComponentProps<typeof Button>, "children"> {
   children?: (
-    state: Pick<
-      AnyFormState,
-      "canSubmit" | "isSubmitting" | "isDefaultValue" | "isDirty" | "isValid"
-    >,
+    state: Pick<AnyFormState, "canSubmit" | "isSubmitting" | "isDefaultValue" | "isDirty" | "isValid">,
   ) => React.ReactNode;
 }
-export default function SubscribeButton({
-  children,
-  ...buttonProps
-}: SubscribeButtonProps) {
+export default function SubscribeButton({ children, ...buttonProps }: SubscribeButtonProps) {
   const form = useFormContext();
   return (
     <form.Subscribe
-      selector={(state) => [
-        state.canSubmit,
-        state.isSubmitting,
-        state.isDirty,
-        state.isValid,
-        state.isDefaultValue,
-      ]}
+      selector={state => [state.canSubmit, state.isSubmitting, state.isDirty, state.isValid, state.isDefaultValue]}
     >
       {([canSubmit, isSubmitting, isDirty, isValid, isDefaultValue]) => (
-        <Button
-          disabled={isDefaultValue || !canSubmit || isSubmitting}
-          {...buttonProps}
-        >
+        <Button disabled={isDefaultValue || !canSubmit || isSubmitting} {...buttonProps}>
           {typeof children === "function"
             ? children({
                 canSubmit,

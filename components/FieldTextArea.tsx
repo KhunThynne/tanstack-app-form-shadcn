@@ -22,13 +22,10 @@ export default function FieldTextArea({
   ...textarea
 }: FieldTextAreaProps) {
   const field = useFieldContext<string>();
-  const errors = useStore(field.store, (state) => state.meta.errors);
+  const errors = useStore(field.store, state => state.meta.errors);
   const isInvalid = errors.length > 0;
   return (
-    <Field
-      data-invalid={isInvalid}
-      className={cn(`flex flex-col gap-1.5`, className, classNames?.field)}
-    >
+    <Field data-invalid={isInvalid} className={cn(`flex flex-col gap-1.5`, className, classNames?.field)}>
       <LabelAndDescriptionFieldForm
         required={textarea.required}
         label={label}
@@ -44,14 +41,11 @@ export default function FieldTextArea({
           id={field.name}
           value={field.state.value}
           className={cn(`order-2`, classNames?.textarea)}
-          onChange={(e) => field.handleChange(e.target.value)}
+          onChange={e => field.handleChange(e.target.value)}
           onBlur={field.handleBlur}
         />
       </LabelAndDescriptionFieldForm>
-      <FieldErrorI18nMessage
-        className={cn(`order-4`, classNames?.validate)}
-        {...validate}
-      />
+      <FieldErrorI18nMessage className={cn(`order-4`, classNames?.validate)} {...validate} />
     </Field>
   );
 }

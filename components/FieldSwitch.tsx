@@ -1,9 +1,4 @@
-import {
-  Field,
-  FieldContent,
-  FieldDescription,
-  FieldLabel,
-} from "@components/ui/field";
+import { Field, FieldContent, FieldDescription, FieldLabel } from "@components/ui/field";
 
 import { useField, useStore } from "@tanstack/react-form";
 import { useFieldContext } from "../hooks";
@@ -16,9 +11,7 @@ import { cn } from "@components/ui/utils";
 type FieldSwitchProps = LabelDescription &
   React.ComponentProps<typeof Switch> & {
     validate?: ValidateProps;
-  } & WithClassNames<
-    "label" | "description" | "switch" | "field" | "validate" | "content"
-  >;
+  } & WithClassNames<"label" | "description" | "switch" | "field" | "validate" | "content">;
 
 export default function FieldSwitch({
   label,
@@ -30,16 +23,12 @@ export default function FieldSwitch({
 }: FieldSwitchProps) {
   const { form, name } = useFieldContext<string[]>();
   const field = useField({ mode: "array", name, form });
-  const errors = useStore(field.store, (state) => state.meta.errors);
+  const errors = useStore(field.store, state => state.meta.errors);
   // const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
   const isInvalid = errors.length > 0;
 
   return (
-    <Field
-      data-invalid={isInvalid}
-      orientation="horizontal"
-      className={cn(className, classNames?.field)}
-    >
+    <Field data-invalid={isInvalid} orientation="horizontal" className={cn(className, classNames?.field)}>
       {(label || description) && (
         <FieldContent className={cn(classNames?.content)}>
           {label && (
@@ -47,15 +36,8 @@ export default function FieldSwitch({
               {label}
             </FieldLabel>
           )}
-          {description && (
-            <FieldDescription className={cn(classNames?.description)}>
-              {description}
-            </FieldDescription>
-          )}
-          <FieldErrorMessage
-            {...validate}
-            className={cn(`order-4`, classNames?.validate)}
-          />
+          {description && <FieldDescription className={cn(classNames?.description)}>{description}</FieldDescription>}
+          <FieldErrorMessage {...validate} className={cn(`order-4`, classNames?.validate)} />
         </FieldContent>
       )}
 
