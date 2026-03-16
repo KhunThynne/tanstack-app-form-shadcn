@@ -3,7 +3,12 @@ import { useFieldContext } from "../hooks";
 
 import type { WithClassNames, LabelDescription, ValidateProps } from "./type";
 
-import { Field, FieldGroup, FieldLabel } from "@components/ui/field";
+import {
+  Field,
+  FieldContent,
+  FieldGroup,
+  FieldLabel,
+} from "@components/ui/field";
 import { cn } from "@components/ui/utils";
 import { Checkbox } from "@components/custom/checkbox";
 import FieldErrorMessage from "./shared/FieldErrorMessage";
@@ -29,17 +34,20 @@ export default function FieldCheckBox({
   const isInvalid = errors.length > 0;
 
   return (
-    <FieldGroup data-slot="checkbox-group">
-      <Field
-        data-invalid={isInvalid}
-        className={cn(`flex flex-col gap-1.5`, className, classNames?.field)}
-      >
-        <span className="flex gap-2">
-          <Checkbox {...checkbox} id={field.name} className={cn(`peer cursor-pointer`)} />
-          <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
-        </span>
-      </Field>
-      <FieldErrorMessage className={cn(classNames?.validate)} {...validate} />
-    </FieldGroup>
+    
+    <Field
+      data-invalid={isInvalid}
+      className={cn(``, className, classNames?.field)}
+    >
+      <Checkbox
+        {...checkbox}
+        id={field.name}
+        className={cn(`peer cursor-pointer`)}
+      />
+      <FieldContent>
+        <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
+        <FieldErrorMessage className={cn(classNames?.validate)} {...validate} />
+      </FieldContent>
+    </Field>
   );
 }

@@ -2,7 +2,6 @@ import {
   Field,
   FieldContent,
   FieldDescription,
-  FieldGroup,
   FieldLabel,
 } from "@components/ui/field";
 
@@ -36,40 +35,40 @@ export default function FieldSwitch({
   const isInvalid = errors.length > 0;
 
   return (
-    <FieldGroup data-slot="checkbox-group">
-      <Field
-        data-invalid={isInvalid}
-        orientation="horizontal"
-        className={cn(`flex gap-1.5`, className, classNames?.field)}
-      >
-        {(label || description) && (
-          <FieldContent className={cn(classNames?.content)}>
-            {label && (
-              <FieldLabel className={cn(classNames?.label)} htmlFor={field.name}>{label}</FieldLabel>
-            )}
-            {description && (
-              <FieldDescription className={cn(classNames?.description)}>
-                {description}
-              </FieldDescription>
-            )}
-            <FieldErrorMessage
-              {...validate}
-              className={cn(`order-4`, classNames?.validate)}
-            />
-          </FieldContent>
-        )}
+    <Field
+      data-invalid={isInvalid}
+      orientation="horizontal"
+      className={cn(className, classNames?.field)}
+    >
+      {(label || description) && (
+        <FieldContent className={cn(classNames?.content)}>
+          {label && (
+            <FieldLabel className={cn(classNames?.label)} htmlFor={field.name}>
+              {label}
+            </FieldLabel>
+          )}
+          {description && (
+            <FieldDescription className={cn(classNames?.description)}>
+              {description}
+            </FieldDescription>
+          )}
+          <FieldErrorMessage
+            {...validate}
+            className={cn(`order-4`, classNames?.validate)}
+          />
+        </FieldContent>
+      )}
 
-        <Switch
-          id={field.name}
-          type="button"
-          name={field.name}
-          checked={field.state.value}
-          className={cn(``, classNames?.switch)}
-          onCheckedChange={field.handleChange}
-          aria-invalid={isInvalid}
-          {...switchProp}
-        />
-      </Field>
-    </FieldGroup>
+      <Switch
+        id={field.name}
+        type="button"
+        name={field.name}
+        checked={field.state.value}
+        className={cn(``, classNames?.switch)}
+        onCheckedChange={field.handleChange}
+        aria-invalid={isInvalid}
+        {...switchProp}
+      />
+    </Field>
   );
 }

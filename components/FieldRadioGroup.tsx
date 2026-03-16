@@ -12,6 +12,7 @@ import {
   FieldContent,
   FieldTitle,
   FieldDescription,
+  FieldLegend,
 } from "@components/ui/field";
 import { cn } from "@components/ui/utils";
 
@@ -49,21 +50,13 @@ export default function FieldRadioGroup({
       data-invalid={isInvalid}
       className={cn(``, className, classNames?.field)}
     >
-      <LabelAndDescriptionFieldForm
-        htmlFor={field.name}
-        label={label}
-        description={description}
-        classNames={{
-          label: cn(classNames?.label),
-          description: cn(classNames?.description),
-        }}
-      >
-        <RadioGroup
+      <FieldLegend>test</FieldLegend>
+         <RadioGroup
           {...radioGrupeProp}
           id={field.name}
           onValueChange={field.handleChange}
           value={field.state.value}
-          className={cn("group border-t pt-3", className, classNames?.group)}
+          className={cn("group", className, classNames?.group)}
         >
           {items.map((item, index) => {
             const id = `${field.name}-${item.value}-${index}`;
@@ -123,7 +116,6 @@ export default function FieldRadioGroup({
             );
           })}
         </RadioGroup>
-      </LabelAndDescriptionFieldForm>
       <FieldErrorMessage
         className={cn(`order-4`, classNames?.validate)}
         {...validate}
