@@ -12,7 +12,7 @@ type FieldSelectProps = LabelDescription &
   React.ComponentProps<typeof Checkbox> & {
     validate?: ValidateProps;
     field?: React.ComponentProps<typeof Field>;
-    description?: string;
+    description?: React.ReactNode | string;
   } & WithClassNames<"label" | "description" | "selectTriger" | "field" | "validate">;
 
 export default function FieldCheckBox({
