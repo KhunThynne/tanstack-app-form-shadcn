@@ -5,8 +5,8 @@ import FieldErrorMessage from "./shared/FieldErrorMessage";
 import type { LabelDescription, ValidateProps, WithClassNames } from "./type";
 import LabelAndDescriptionFieldForm from "./shared/LabelAndDescriptionFieldForm";
 
-import { cn } from "@components/ui/utils";
-import { Field } from "@components/ui/field";
+import { cn } from "@/libs/shadcn/utils";
+import { Field } from "@/libs/shadcn/ui/field";
 import {
   Select,
   SelectContent,
@@ -15,7 +15,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/shared/components/ui/select";
+} from "@/libs/shadcn/ui/select";
 
 type Option = {
   label: string;

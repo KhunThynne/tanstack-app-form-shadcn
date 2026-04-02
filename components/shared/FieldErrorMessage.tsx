@@ -1,6 +1,6 @@
 import { useStore } from "@tanstack/react-form";
-import { FieldError } from "@components/ui/field";
-import { cn } from "@components/ui/utils";
+import { FieldError } from "@/libs/shadcn/ui/field";
+import { cn } from "@/libs/shadcn/utils";
 import { useFieldContext } from "../../hooks";
 import type { ValidateProps } from "../type";
 interface FieldErrorMessageProps extends Omit<React.ComponentProps<"p">, "children"> {

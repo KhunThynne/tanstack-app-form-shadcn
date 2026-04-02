@@ -8,10 +8,10 @@ import type { LabelDescription, ValidateProps, WithClassNames } from "./type";
 import { Eye, EyeClosed, X } from "lucide-react";
 
 import { useMemo, useState } from "react";
-import { Input } from "@components/ui/input";
-import { InputGroup, InputGroupInput, InputGroupAddon } from "@components/ui/input-group";
-import { cn } from "@components/ui/utils";
-import { Field } from "@components/ui/field";
+import { Input } from "@/libs/shadcn/ui/input";
+import { InputGroup, InputGroupInput, InputGroupAddon } from "@/libs/shadcn/ui/input-group";
+import { cn } from "@/libs/shadcn/utils";
+import { Field } from "@/libs/shadcn/ui/field";
 
 type FieldInputProps = LabelDescription &
   React.ComponentProps<typeof Input> & {

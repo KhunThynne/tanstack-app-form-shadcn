@@ -3,9 +3,9 @@ import { useFieldContext } from "../hooks";
 
 import type { WithClassNames, LabelDescription, ValidateProps } from "./type";
 
-import { Field, FieldContent, FieldDescription, FieldLabel } from "@components/ui/field";
-import { cn } from "@components/ui/utils";
-import { Checkbox } from "@components/custom/checkbox";
+import { Field, FieldContent, FieldDescription, FieldLabel } from "@/libs/shadcn/ui/field";
+import { cn } from "@/libs/shadcn/utils";
+import { Checkbox } from "@/libs/shadcn/custom/checkbox";
 import FieldErrorMessage from "./shared/FieldErrorMessage";
 
 type FieldSelectProps = LabelDescription &

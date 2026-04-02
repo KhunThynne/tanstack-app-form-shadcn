@@ -1,12 +1,12 @@
-import { Field } from "@components/ui/field";
+import { Field } from "@/libs/shadcn/ui/field";
 import { useStore } from "@tanstack/react-form";
 import { useFieldContext } from "../hooks";
 import LabelAndDescriptionFieldForm from "./shared/LabelAndDescriptionFieldForm";
 import FieldErrorI18nMessage from "./shared/FieldErrorMessage";
 
-import { Textarea } from "@components/ui/textarea";
+import { Textarea } from "@/libs/shadcn/ui/textarea";
 import type { LabelDescription, ValidateProps, WithClassNames } from "./type";
-import { cn } from "@components/ui/utils";
+import { cn } from "@/libs/shadcn/utils";
 
 type FieldTextAreaProps = LabelDescription & {
   validate?: ValidateProps;

@@ -1,12 +1,12 @@
-import { Field, FieldContent, FieldDescription, FieldLabel } from "@components/ui/field";
+import { Field, FieldContent, FieldDescription, FieldLabel } from "@/libs/shadcn/ui/field";
 
 import { useField, useStore } from "@tanstack/react-form";
 import { useFieldContext } from "../hooks";
 import FieldErrorMessage from "./shared/FieldErrorMessage";
 
 import type { LabelDescription, ValidateProps, WithClassNames } from "./type";
-import { Switch } from "@components/ui/switch";
-import { cn } from "@components/ui/utils";
+import { Switch } from "@/libs/shadcn/ui/switch";
+import { cn } from "@/libs/shadcn/utils";
 
 type FieldSwitchProps = LabelDescription &
   React.ComponentProps<typeof Switch> & {

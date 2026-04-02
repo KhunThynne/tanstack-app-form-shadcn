@@ -13,9 +13,9 @@ import {
   FieldTitle,
   FieldDescription,
   FieldLegend,
-} from "@components/ui/field";
-import { cn } from "@components/ui/utils";
-import { RadioGroup, RadioGroupItem } from "@/shared/components/ui/radio-group";
+} from "@/libs/shadcn/ui/field";
+import { cn } from "@/libs/shadcn/utils";
+import { RadioGroup, RadioGroupItem } from "@/libs/shadcn/ui/radio-group";
 import React from "react";
 
 type CommonClassNames = WithClassNames<"container" | "title" | "description" | "section">;
